@@ -1,6 +1,6 @@
 <?php
     ob_start();
-
+    session_start();
     $timezone = date_default_timezone_set("Europe/Prague");
     $con = mysqli_connect("localhost", "root", "", "vitify");
     if(mysqli_connect_errno()){

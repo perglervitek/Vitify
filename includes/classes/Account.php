@@ -8,6 +8,16 @@
             $this->con = $con;
             $this-> errorArray = array();
         }
+        public function login($un,$ps){
+            $ps = md5($ps);
+            $result = mysqli_query($this->con, "SELECT * FROM users WHERE username='$un' AND password='$ps'");
+            if(mysqli_num_rows($result) == 1){
+                return true;
+            }else{
+                array_push($this->errorArray, Constants::$loginFailed);
+                return false;
+            }
+        }
         public function register($un, $fn, $ln, $em, $em2, $pw, $pw2) {
             $this->validaceUsername($un);
             $this->validaceFirstName($fn);
@@ -34,8 +44,7 @@
             $profilePic = "assets/images/profile-pics/head_emerald.png";
             $date = date("Y-m-d");
 
-            $query = "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')";
-            $result = mysqli_query($this->con, $query);
+            $result = mysqli_query($this->con, "INSERT INTO users VALUES ('', '$un', '$fn', '$ln', '$em', '$encryptedPw', '$date', '$profilePic')");
 
             return $result;
         }
@@ -68,10 +77,10 @@
                 array_push($this->errorArray, Constants::$emailsNotMatch);
                 return;
             }
-            if(filter_var($em, FITLER_VALIDATE_EMAIL)){
+            /*if(filter_var($em, FITLER_VALIDATE_EMAIL)){
                 array_push($this->errorArray, Constants::$eamilInvalid);
                 return;
-            }
+            }*/
             $checkUsQuery = mysqli_query($this->con,  "SELECT email FROM users WHERE email='$em'");
             if(mysqli_num_rows($checkUsQuery) != 0){
                 array_push($this->errorArray, Constants:: $emailUsed);
