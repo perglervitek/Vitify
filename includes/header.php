@@ -16,10 +16,15 @@ if(isset($_SESSION["userLoggedIn"])){
     <meta name="viewport"
           content="width=device-width, user-scalable=no, initial-scale=1.0, maximum-scale=1.0, minimum-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
-    <title>Document</title>
+    <title>Vitify</title>
     <link rel="stylesheet" type="text/css" href="assets/css/style.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="assets/js/script.js"></script>
 </head>
 <body>
+<script>
+
+</script>
 <div id="mainContainer">
     <div id="topContainer">
         <?php
